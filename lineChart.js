@@ -17,16 +17,20 @@ const labels = [
 const data = {
     labels: labels,
     datasets: [{
-        label: 'AUM',
-        rtl: false,
+        label: 'Inversión',
         data: [0, 10*1000000, 5*1000000, 2*1000000, 20*1000000, 30*1000000, 45*1000000],
         fill: true,
         backgroundColor: gradient,
-        borderColor: '#fff',
+        borderColor: gradient,
         pointBackgroundColor: 'rgb(189,195,199)',
-        tension: 0.1
+    },
+    {
+        label: 'FinPlan',
+        data: [0, 10*1000000, 5.2*1000000, 8*1000000, 26*1000000, 34*1000000, 48*1000000],
+        borderColor: 'rgb(58,123,213)',
     }]
 };
+
 
 const config = {
     type: 'line',
@@ -57,6 +61,10 @@ const config = {
             legend: {
               display: false
             }
+        },
+        interaction: {
+            mode: 'index',
+            axis: 'y'
         }
     }
     };
