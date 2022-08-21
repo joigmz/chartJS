@@ -46,7 +46,7 @@ for (let i = 0; i < 600; i++) {
 
 
 const data = {
-    labels: daysOfYear,
+    labels: daysOfYear.map(t => t.toLocaleString([], {year: 'numeric', day: 'numeric', month: 'numeric'})),
     datasets: [{
         label: 'Inversión',
         data: data1,
@@ -94,6 +94,17 @@ const config = {
         plugins:{
             legend: {
               display: false
+            },
+            tooltip:{
+                backgroundColor: 'rgb(255,255,255,0.7)',
+                titleColor: 'black',
+                bodyColor: 'black',
+                borderColor: 'rgb(58,123,213,0.1)',
+                borderWidth:1,
+                bodyFont: {
+                    family: "'Poppins', sans-serif",
+                    weight:200
+                }
             }
         },
         interaction: {
