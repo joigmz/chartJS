@@ -33,7 +33,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
   }
 
-const n = getRandomInt(1,1000)
+const n = getRandomInt(1,100)
 console.log(n);
 
 const daysOfYear =  [];
@@ -101,6 +101,7 @@ const config = {
             },
             x:{
                 ticks:{
+                    maxTicksLimit:6,
                     maxRotation:0,
                     font: {
                         family: "'Poppins', sans-serif",
