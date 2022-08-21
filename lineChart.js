@@ -96,7 +96,7 @@ const config = {
               display: false
             },
             tooltip:{
-                backgroundColor: 'rgb(255,255,255,0.7)',
+                backgroundColor: 'rgb(255,255,255,0.9)',
                 titleColor: 'black',
                 bodyColor: 'black',
                 borderColor: 'rgb(58,123,213,0.1)',
