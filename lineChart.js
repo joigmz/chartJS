@@ -101,7 +101,7 @@ const config = {
             },
             x:{
                 ticks:{
-                    maxTicksLimit:6,
+                    maxTicksLimit:3,
                     maxRotation:0,
                     font: {
                         family: "'Poppins', sans-serif",
