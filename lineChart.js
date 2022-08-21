@@ -1,22 +1,37 @@
 const ctx = document.getElementById('myChart').getContext("2d");
 
-//Prediction
-const prediction = (ctx, value) => ctx.p0.skip || ctx.p1.skip ? value : undefined;
+//Tooltipline block
+const tooltipline = {
+    id: 'tooltipline',
+    beforeDraw: chart => {
+        if (chart.tooltip._active && chart.tooltip._active.length) {
+            const ctx = chart.ctx;
+            ctx.save();
+            const activePoint = chart.tooltip._active[0];
+
+            ctx.beginPath();
+            ctx.moveTo(activePoint.element.x, chart.chartArea.top);
+            ctx.lineTo(activePoint.element.x, chart.chartArea.bottom);
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+            ctx.stroke();
+            ctx.restore();
+
+        }
+    }
+};
 
 //Gradient fill
 let gradient = ctx.createLinearGradient(0,0,0,400);
 gradient.addColorStop(0, "rgba(58,123,213,1)");
 gradient.addColorStop(1, "rgba(0,210,255,0.3)");
 
-const actions = [
-    {
-        name: 'Mode: nearest, axis: x',
-        handler(chart) {
-          chart.options.interaction.axis = 'x';
-          chart.options.interaction.mode = 'nearest';
-          chart.update();
-        }
-      }]
+const daysOfYear =  [];
+var d = new Date(2012, 0, 1);
+for (let i = 0; i < 600; i++) {
+    daysOfYear.push(new Date(d));
+    d.setDate(d.getDate() + 1)
+}
 
 const data1 = [];
 const data2 = [];
@@ -31,7 +46,7 @@ for (let i = 0; i < 600; i++) {
 
 
 const data = {
-    labels: data1,
+    labels: daysOfYear,
     datasets: [{
         label: 'Inversión',
         data: data1,
@@ -48,10 +63,6 @@ const data = {
         borderColor: 'rgb(58,123,213)',
         borderWidth: 1,
         pointBackgroundColor: 'rgb(58,123,213)',
-        segment: {
-            borderColor: ctx => prediction(ctx, 'rgb(0,0,0,0.2)'),
-            borderDash: ctx => prediction(ctx, [6, 6]),
-          }
     }]
 };
 
@@ -67,7 +78,7 @@ const config = {
             y:{
                 ticks:{
                     callback: function (value){
-                        return '$'+value/1000000+'m';
+                        return '$'+value+'m';
                     }
                 },
                 grid: {
@@ -80,7 +91,7 @@ const config = {
                 } 
             }
         },
-        plugins: {
+        plugins:{
             legend: {
               display: false
             }
@@ -90,7 +101,8 @@ const config = {
             mode: 'index',
             axis: 'x'
         }
-    }
+    },
+    plugins: [tooltipline]
     };
 
 const myChart = new Chart(ctx, config);
