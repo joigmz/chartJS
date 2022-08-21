@@ -26,9 +26,19 @@ let gradient = ctx.createLinearGradient(0,0,0,400);
 gradient.addColorStop(0, "rgba(58,123,213,1)");
 gradient.addColorStop(1, "rgba(0,210,255,0.3)");
 
+//number of simulations
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+  }
+
+const n = getRandomInt(1,1000)
+console.log(n);
+
 const daysOfYear =  [];
-var d = new Date(2012, 0, 1);
-for (let i = 0; i < 600; i++) {
+var d = new Date(2022, 0, 1);
+for (let i = 0; i < n; i++) {
     daysOfYear.push(new Date(d));
     d.setDate(d.getDate() + 1)
 }
@@ -37,7 +47,7 @@ const data1 = [];
 const data2 = [];
 let prev = 100;
 let prev2 = 200;
-for (let i = 0; i < 600; i++) {
+for (let i = 0; i < n; i++) {
   prev += 5 - Math.random() * 10;
   data1.push({x: i, y: prev});
   prev2 += 5 - Math.random() * 10;
@@ -79,6 +89,10 @@ const config = {
                 ticks:{
                     callback: function (value){
                         return '$'+value+'m';
+                    },
+                    font: {
+                        family: "'Poppins', sans-serif",
+                        weight:200
                     }
                 },
                 grid: {
@@ -86,6 +100,13 @@ const config = {
                 }  
             },
             x:{
+                ticks:{
+                    maxRotation:0,
+                    font: {
+                        family: "'Poppins', sans-serif",
+                        weight:200
+                    }
+                },
                 grid: {
                     display:false
                 } 
